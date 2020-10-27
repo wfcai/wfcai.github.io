@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="终有弱水替沧海，再无相思寄巫山。">
+<meta name="description" content="列运算数量类型的列可以做加减乘除运算12select sal*1.5 from emp;select sal+comm from emp;  字符串类型可以做连续运算1select concat(&apos;$&apos;,sal) from emp;  转换null值有时需要把null转换成其他值，例如com+1000时，如果com列存在NULL值，那么NULL+1000还是NULL，而我们这时希望把NULL当成0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="心有千千结">
-<meta property="og:url" content="http://yoursite.com/2020/10/22/1022/index.html">
+<meta property="og:title" content="蔡伟峰">
+<meta property="og:url" content="http://yoursite.com/2020/10/27/列运算/index.html">
 <meta property="og:site_name" content="蔡伟峰">
-<meta property="og:description" content="终有弱水替沧海，再无相思寄巫山。">
+<meta property="og:description" content="列运算数量类型的列可以做加减乘除运算12select sal*1.5 from emp;select sal+comm from emp;  字符串类型可以做连续运算1select concat(&apos;$&apos;,sal) from emp;  转换null值有时需要把null转换成其他值，例如com+1000时，如果com列存在NULL值，那么NULL+1000还是NULL，而我们这时希望把NULL当成0">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-21T16:51:31.950Z">
+<meta property="og:updated_time" content="2020-10-27T14:11:52.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="心有千千结">
-<meta name="twitter:description" content="终有弱水替沧海，再无相思寄巫山。">
+<meta name="twitter:title" content="蔡伟峰">
+<meta name="twitter:description" content="列运算数量类型的列可以做加减乘除运算12select sal*1.5 from emp;select sal+comm from emp;  字符串类型可以做连续运算1select concat(&apos;$&apos;,sal) from emp;  转换null值有时需要把null转换成其他值，例如com+1000时，如果com列存在NULL值，那么NULL+1000还是NULL，而我们这时希望把NULL当成0">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/10/22/1022/">
+  <link rel="canonical" href="http://yoursite.com/2020/10/27/列运算/">
 
 
 
 
 
-  <title>心有千千结 | 蔡伟峰</title>
+  <title> | 蔡伟峰</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/22/1022/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/27/列运算/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="蔡伟峰">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">心有千千结</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-22T19:06:24+08:00">
-                2020-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-27T22:09:35+08:00">
+                2020-10-27
               </time>
             
 
@@ -299,7 +299,15 @@
       
 
       
-        <p>终有弱水替沧海，再无相思寄巫山。</p>
+        <h1 id="列运算"><a href="#列运算" class="headerlink" title="列运算"></a><strong>列运算</strong></h1><h2 id="数量类型的列可以做加减乘除运算"><a href="#数量类型的列可以做加减乘除运算" class="headerlink" title="数量类型的列可以做加减乘除运算"></a>数量类型的列可以做加减乘除运算</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> sal*<span class="number">1.5</span> <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> sal+comm <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串类型可以做连续运算"><a href="#字符串类型可以做连续运算" class="headerlink" title="字符串类型可以做连续运算"></a>字符串类型可以做连续运算</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(<span class="string">'$'</span>,sal) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="转换null值"><a href="#转换null值" class="headerlink" title="转换null值"></a>转换null值</h2><p>有时需要把null转换成其他值，例如com+1000时，如果com列存在NULL值，那么NULL+1000还是NULL，而我们这时希望把NULL当成0来运算</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">ifnull</span>(comm,<span class="number">0</span>)+<span class="number">1000</span> <span class="keyword">from</span> emp; <span class="comment">--如果comm列的值为NULL，则转成0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列的别名"><a href="#列的别名" class="headerlink" title="列的别名"></a>列的别名</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">ifnull</span>(comm,<span class="number">0</span>)+<span class="number">1000</span> <span class="keyword">as</span> bonus <span class="keyword">from</span> emp;  </span><br><span class="line"><span class="comment">-- as 可省略</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">ifnull</span>(comm,<span class="number">0</span>)+<span class="number">1000</span> bonus <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -320,6 +328,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/27/SQL练习题/" rel="next" title="SQL练习题">
+                <i class="fa fa-chevron-left"></i> SQL练习题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
@@ -368,8 +392,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -384,7 +417,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -411,6 +444,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#列运算"><span class="nav-number">1.</span> <span class="nav-text">列运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数量类型的列可以做加减乘除运算"><span class="nav-number">1.1.</span> <span class="nav-text">数量类型的列可以做加减乘除运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串类型可以做连续运算"><span class="nav-number">1.2.</span> <span class="nav-text">字符串类型可以做连续运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换null值"><span class="nav-number">1.3.</span> <span class="nav-text">转换null值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列的别名"><span class="nav-number">1.4.</span> <span class="nav-text">列的别名</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
