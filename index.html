@@ -302,92 +302,138 @@
 
       
         
+          <p><strong>SQL练习题</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/27/SQL练习题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/27/列运算/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蔡伟峰">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蔡伟峰">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/27/列运算/" itemprop="url">列运算</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-27T21:52:24+08:00">
+                2020-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-            <ol>
-<li><p>查出至少有一个员工的部门。显示部门编号、部门名称、部门位置、部门人数。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：d.deptno,d.dname,d.loc,部门人数</span></span><br><span class="line"><span class="comment">表：dept d , emp e</span></span><br><span class="line"><span class="comment">条件：e.deptno=d.deptno</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> d.*,z1.cnt</span><br><span class="line"><span class="keyword">FROM</span> dept d,</span><br><span class="line">  (<span class="keyword">SELECT</span> deptno,<span class="keyword">COUNT</span>(*) cnt <span class="keyword">FROM</span> emp <span class="keyword">GROUP</span> <span class="keyword">BY</span> deptno) z1</span><br><span class="line"><span class="keyword">WHERE</span> d.deptno=z1.deptno</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>列出所有员工的姓名及其直接上级的姓名。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：员工姓名、上级姓名</span></span><br><span class="line"><span class="comment">表：emp e , emp m</span></span><br><span class="line"><span class="comment">条件：</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.ename 员工,<span class="keyword">IFNULL</span> (m.ename,<span class="string">'BOSS'</span>) 领导 </span><br><span class="line"><span class="keyword">FROM</span> emp e</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> emp m</span><br><span class="line"><span class="keyword">ON</span> e.mgr=m.empno</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="3">
-<li><p>列出受雇日期早于直接上级的所有员工的编号、姓名、部门名称。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：empno、ename、d.dname</span></span><br><span class="line"><span class="comment">表：emp e ,emp m, dept d</span></span><br><span class="line"><span class="comment">条件：受雇日期早于直接上级</span></span><br><span class="line"><span class="comment">   思路：</span></span><br><span class="line"><span class="comment">   先不查部门名称，只查部门编号</span></span><br><span class="line"><span class="comment">	列：e.empno , e.ename , e.deptno</span></span><br><span class="line"><span class="comment">	表：emp e , emp m</span></span><br><span class="line"><span class="comment">	条件：e.mgr=m.empno , e.hiredate &lt; m.hiredate</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.empno,e.ename,d.dname</span><br><span class="line"><span class="keyword">FROM</span> emp e,emp m,dept d</span><br><span class="line"><span class="keyword">WHERE</span> e.mgr=m.empno <span class="keyword">AND</span> e.hiredate &lt; m.hiredate <span class="keyword">AND</span> e.deptno=d.deptno</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="4">
-<li><p>列出部门名称和这些部门的员工信息，同时列出那些没有员工的部门</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：d.dname,e.*</span></span><br><span class="line"><span class="comment">表：emp e , dept d</span></span><br><span class="line"><span class="comment">条件：</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.* , d.dname </span><br><span class="line"><span class="keyword">FROM</span> emp e <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> dept d</span><br><span class="line"><span class="keyword">ON</span> e.deptno=d.deptno</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="5">
-<li><p>列出最低薪金大于15000的各种工作及从事此工作的员工人数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：job , 员工人数</span></span><br><span class="line"><span class="comment">表：emp</span></span><br><span class="line"><span class="comment">条件：sal &gt; 15000 </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> job ,<span class="keyword">COUNT</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> emp</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> job</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">MIN</span>(sal) &gt; <span class="number">15000</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="6">
-<li><p>列出在销售部工作的员工的姓名，假定不知道销售部门的编号</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：e.ename</span></span><br><span class="line"><span class="comment">表：emp e , dept d</span></span><br><span class="line"><span class="comment">条件：e.deptno=d.deptno and d.dname='销售部'</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">解法1：</span><br><span class="line"><span class="keyword">SELECT</span> e.ename</span><br><span class="line"><span class="keyword">FROM</span> emp e </span><br><span class="line"><span class="keyword">WHERE</span> e.deptno = (<span class="keyword">SELECT</span> deptno <span class="keyword">FROM</span> dept d <span class="keyword">WHERE</span> dname=<span class="string">'销售部'</span>)</span><br><span class="line"></span><br><span class="line">解法<span class="number">2</span>：</span><br><span class="line"><span class="keyword">SELECT</span> e.ename</span><br><span class="line"><span class="keyword">FROM</span> emp e <span class="keyword">JOIN</span> dept d</span><br><span class="line"><span class="keyword">ON</span> e.deptno=d.deptno <span class="keyword">AND</span> d.dname=<span class="string">'销售部'</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="7">
-<li><p>列出薪金高于公司平均薪金的所有员工信息，所在的部门名称，上级领导，工资等级。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：e.* , d.dname , e,ename , s.grade</span></span><br><span class="line"><span class="comment">表：emp e , dept d , salgrade s</span></span><br><span class="line"><span class="comment">条件：e.sal &gt; (SELECT AVG(sal) FROM emp)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">思路:</span><br><span class="line"><span class="keyword">SELECT</span> e.* , d.dname , m.ename , s.grade</span><br><span class="line"><span class="keyword">FROM</span> emp e, dept d , emp m , salgrade s</span><br><span class="line"><span class="keyword">WHERE</span> e.sal &gt; (<span class="keyword">SELECT</span> <span class="keyword">AVG</span>(sal) <span class="keyword">FROM</span> emp) </span><br><span class="line"><span class="keyword">AND</span> e.deptno=d.deptno </span><br><span class="line"><span class="keyword">AND</span> e.mgr=m.empno</span><br><span class="line"><span class="keyword">AND</span> e.sal <span class="keyword">BETWEEN</span> s.losal <span class="keyword">AND</span> s.hisal</span><br><span class="line"></span><br><span class="line">解：</span><br><span class="line"><span class="keyword">SELECT</span> e.* , d.dname , m.ename , s.grade</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">  emp e <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> dept d <span class="keyword">ON</span> e.deptno=d.deptno </span><br><span class="line">	<span class="keyword">LEFT</span> <span class="keyword">JOIN</span> emp m <span class="keyword">ON</span> e.mgr=m.empno</span><br><span class="line">	<span class="keyword">LEFT</span> <span class="keyword">JOIN</span> salgrade s <span class="keyword">ON</span> e.sal <span class="keyword">BETWEEN</span> s.losal <span class="keyword">AND</span> s.hisal</span><br><span class="line"><span class="keyword">WHERE</span> e.sal &gt; (<span class="keyword">SELECT</span> <span class="keyword">AVG</span>(sal) <span class="keyword">FROM</span> emp)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="8">
-<li><p>列出与庞统从事相同工作的所有员工及部门名称。</p>
-<ol>
-<li><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：e.* , d.dname</span></span><br><span class="line"><span class="comment">表：emp e , dept d</span></span><br><span class="line"><span class="comment">条件：job = (庞统的工作)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.* , d.dname</span><br><span class="line"><span class="keyword">FROM</span> emp e , dept d</span><br><span class="line"><span class="keyword">WHERE</span> e.deptno=d.deptno <span class="keyword">AND</span> job = (<span class="keyword">SELECT</span> job <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename=<span class="string">'庞统'</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-</li>
-</ol>
-<ol start="9">
-<li><p>列出薪金高于在部门30工作的所有员工的薪金的员工姓名和薪金、部门名称。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：e.ename , e.sal , d.dname</span></span><br><span class="line"><span class="comment">表：emp e , dept d</span></span><br><span class="line"><span class="comment">条件：sal &gt; (select max(sal) from emp where deptno = 30)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.ename , e.sal , d.dname</span><br><span class="line"><span class="keyword">FROM</span> emp e , dept d</span><br><span class="line"><span class="keyword">WHERE</span> e.deptno=d.deptno <span class="keyword">AND</span> e.sal &gt; <span class="keyword">ALL</span> (<span class="keyword">SELECT</span> sal <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> deptno = <span class="number">30</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="10">
-<li><p>查出年份、利润、年度增长比。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：year , zz ,增长比</span></span><br><span class="line"><span class="comment">表：tb_year y1 , tb_year y2</span></span><br><span class="line"><span class="comment">条件：</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> y1.* , <span class="keyword">IFNULL</span>(<span class="keyword">CONCAT</span>((y1.zz - y2.zz) / y2.zz * <span class="number">100</span>,<span class="string">'0%'</span>),<span class="number">0</span>) 增长比</span><br><span class="line"><span class="keyword">FROM</span> tb_year y1 <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> tb_year y2</span><br><span class="line"><span class="keyword">ON</span> y1.year = y2.year + <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
 
           
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>列运算</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/27/列运算/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -504,48 +550,14 @@
 
       
         
-          
-            <p><strong>子查询:</strong><br>  查询中有查询(查看select 关键字的个数)</p>
-<ol>
-<li>出现的位置:<ul>
-<li>WHERE 后作为条件存在</li>
-<li>FROM 后作为表存在(多行多列)</li>
-</ul>
-</li>
-</ol>
-<ol start="2">
-<li><p>条件</p>
-<ul>
-<li><p>单行单列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">WHERE</span> 列<span class="number">1</span> [=、&gt;、&lt;=、&gt;=、!=] (<span class="keyword">SELECT</span> 列 <span class="keyword">FROM</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">WHERE</span> 条件)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>多行单列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">WHERE</span> 列<span class="number">1</span> [<span class="keyword">IN</span>,<span class="keyword">ALL</span>,<span class="keyword">ANY</span>] (<span class="keyword">SELECT</span> 列 <span class="keyword">FROM</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">WHERE</span> 条件)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>单行多列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">WHERE</span> (列<span class="number">1</span>,列<span class="number">2</span>) <span class="keyword">IN</span> (<span class="keyword">SELECT</span> 列<span class="number">1</span>,列<span class="number">2</span> <span class="keyword">FROM</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">WHERE</span> 条件)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>多行多列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> , (<span class="keyword">SELECT</span> ...) 别名<span class="number">2</span> <span class="keyword">WHERE</span> 条件</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-</li>
-</ul>
-</li>
-</ol>
-<ol start="3">
-<li><p>Demo</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--Demo</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> emp </span><br><span class="line"><span class="keyword">WHERE</span> sal = (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(sal) <span class="keyword">FROM</span> emp) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> 列(可以出现子查询，不标准的使用)</span><br><span class="line"><span class="keyword">FROM</span> 表(可以出现子查询)</span><br><span class="line"><span class="keyword">WHERE</span> 条件(可以出现子查询)</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> e.empno,e.ename</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> deptno=<span class="number">30</span>) <span class="keyword">AS</span> e</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> sal &gt; (<span class="keyword">SELECT</span> <span class="keyword">AVG</span>(sal) <span class="keyword">FROM</span> emp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> sal <span class="keyword">IN</span> (<span class="keyword">SELECT</span> sal <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> deptno = <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> (job,deptno) <span class="keyword">IN</span> (<span class="keyword">SELECT</span> job,deptno <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename=<span class="string">'smith'</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-
-          
+          <p><strong>子查询</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/27/子查询/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -611,7 +623,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/10/27/表素材/" itemprop="url">练习表</a></h1>
+                <a class="post-title-link" href="/2020/10/27/表素材/" itemprop="url">表素材</a></h1>
         
 
         <div class="post-meta">
@@ -662,24 +674,14 @@
 
       
         
-          
-            <ol>
-<li><p>emp表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--DDL</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`emp`</span> (</span><br><span class="line">  <span class="string">`EMPNO`</span> <span class="built_in">INT</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`ENAME`</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`JOB`</span> <span class="built_in">VARCHAR</span>(<span class="number">9</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`MGR`</span> <span class="keyword">DOUBLE</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`HIREDATE`</span> <span class="built_in">DATE</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`SAL`</span> <span class="keyword">DOUBLE</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`COMM`</span> <span class="keyword">DOUBLE</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`DEPTNO`</span> <span class="built_in">INT</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`EMPNO`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">INNODB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="comment">--数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1007</span>,<span class="string">'张飞'</span>,<span class="string">'经理'</span>,<span class="number">1009</span>,<span class="string">'2001-09-01'</span>,<span class="string">'24500.00'</span>,<span class="literal">NULL</span>,<span class="number">10</span>),</span><br><span class="line">(<span class="number">1009</span>,<span class="string">'曾阿牛'</span>,<span class="string">'董事长'</span>,<span class="literal">NULL</span>,<span class="string">'2001-11-17'</span>,<span class="string">'50000.00'</span>,<span class="literal">NULL</span>,<span class="number">10</span>),</span><br><span class="line">(<span class="number">1014</span>,<span class="string">'黄盖'</span>,<span class="string">'文员'</span>,<span class="number">1007</span>,<span class="string">'2002-01-23'</span>,<span class="string">'13000.00'</span>,<span class="literal">NULL</span>,<span class="number">10</span>),</span><br><span class="line">(<span class="number">1001</span>,<span class="string">'甘宁'</span>,<span class="string">'文员'</span>,<span class="number">1013</span>,<span class="string">'2000-12-17'</span>,<span class="string">'8000.00'</span>,<span class="literal">NULL</span>,<span class="number">20</span>),</span><br><span class="line">(<span class="number">1004</span>,<span class="string">'刘备'</span>,<span class="string">'经理'</span>,<span class="number">1009</span>,<span class="string">'2001-04-02'</span>,<span class="string">'29750.00'</span>,<span class="literal">NULL</span>,<span class="number">20</span>),</span><br><span class="line">(<span class="number">1008</span>,<span class="string">'诸葛亮'</span>,<span class="string">'分析师'</span>,<span class="number">1004</span>,<span class="string">'2007-04-19'</span>,<span class="string">'30000.00'</span>,<span class="literal">NULL</span>,<span class="number">20</span>),</span><br><span class="line">(<span class="number">1011</span>,<span class="string">'周泰'</span>,<span class="string">'文员'</span>,<span class="number">1008</span>,<span class="string">'2001-05-23'</span>,<span class="string">'11000.00'</span>,<span class="literal">NULL</span>,<span class="number">20</span>),</span><br><span class="line">(<span class="number">1013</span>,<span class="string">'庞统'</span>,<span class="string">'分析师'</span>,<span class="number">1004</span>,<span class="string">'2001-12-03'</span>,<span class="string">'30000.00'</span>,<span class="literal">NULL</span>,<span class="number">20</span>),</span><br><span class="line">(<span class="number">1002</span>,<span class="string">'黛绮丝'</span>,<span class="string">'销售员'</span>,<span class="number">1006</span>,<span class="string">'2001-02-20'</span>,<span class="string">'16000.00'</span>,<span class="string">'3000.00'</span>,<span class="number">30</span>),</span><br><span class="line">(<span class="number">1003</span>,<span class="string">'殷天正'</span>,<span class="string">'销售员'</span>,<span class="number">1006</span>,<span class="string">'2001-02-22'</span>,<span class="string">'12500.00'</span>,<span class="string">'5000.00'</span>,<span class="number">30</span>),</span><br><span class="line">(<span class="number">1005</span>,<span class="string">'谢逊'</span>,<span class="string">'销售员'</span>,<span class="number">1006</span>,<span class="string">'2001-09-28'</span>,<span class="string">'12500.00'</span>,<span class="string">'14000.00'</span>,<span class="number">30</span>),</span><br><span class="line">(<span class="number">1006</span>,<span class="string">'关羽'</span>,<span class="string">'经理'</span>,<span class="number">1009</span>,<span class="string">'2001-05-01'</span>,<span class="string">'28500.00'</span>,<span class="literal">NULL</span>,<span class="number">30</span>),</span><br><span class="line">(<span class="number">1010</span>,<span class="string">'韦一笑'</span>,<span class="string">'销售员'</span>,<span class="number">1006</span>,<span class="string">'2001-09-08'</span>,<span class="string">'15000.00'</span>,<span class="string">'0.00'</span>,<span class="number">30</span>),</span><br><span class="line">(<span class="number">1012</span>,<span class="string">'程普'</span>,<span class="string">'文员'</span>,<span class="number">1006</span>,<span class="string">'2001-12-03'</span>,<span class="string">'9500.00'</span>,<span class="literal">NULL</span>,<span class="number">30</span>),</span><br><span class="line">(<span class="number">1015</span>,<span class="string">'张三'</span>,<span class="string">'保洁员'</span>,<span class="number">1001</span>,<span class="string">'2003-05-01'</span>,<span class="string">'80000.00'</span>,<span class="string">'50000.00'</span>,<span class="number">50</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>dept表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--DDL</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`dept`</span> (</span><br><span class="line">  <span class="string">`deptno`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`dname`</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`loc`</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span></span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">--数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`dept`</span></span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">10</span>, <span class="string">'教研部'</span>, <span class="string">'北京'</span>),</span><br><span class="line">	(<span class="number">20</span>, <span class="string">'学工部'</span>, <span class="string">'上海'</span>),</span><br><span class="line">	(<span class="number">30</span>, <span class="string">'销售部'</span>, <span class="string">'广州'</span>),</span><br><span class="line">	(<span class="number">40</span>, <span class="string">'财务部'</span>, <span class="string">'武汉'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>tb_year表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--DDL</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tb_year</span><br><span class="line">(<span class="string">`year`</span> <span class="built_in">INT</span>(<span class="number">11</span>),</span><br><span class="line"><span class="string">`zz`</span> <span class="built_in">INT</span>(<span class="number">11</span>) </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">--数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_year <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">2010</span>,<span class="number">100</span>),</span><br><span class="line">(<span class="number">2011</span>,<span class="number">150</span>),</span><br><span class="line">(<span class="number">2012</span>,<span class="number">250</span>),</span><br><span class="line">(<span class="number">2013</span>,<span class="number">800</span>),</span><br><span class="line">(<span class="number">2014</span>,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>salgrade表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--DDL</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> salgrade</span><br><span class="line">(grade <span class="built_in">INT</span>(<span class="number">11</span>),</span><br><span class="line">losal <span class="built_in">INT</span>(<span class="number">11</span>),</span><br><span class="line">hisal <span class="built_in">INT</span>(<span class="number">11</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">--数据</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> salgrade <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1</span>,<span class="number">7000</span>,<span class="number">12000</span>),</span><br><span class="line">(<span class="number">2</span>,<span class="number">12010</span>,<span class="number">14000</span>),</span><br><span class="line">(<span class="number">3</span>,<span class="number">14010</span>,<span class="number">20000</span>),</span><br><span class="line">(<span class="number">4</span>,<span class="number">20010</span>,<span class="number">30000</span>),</span><br><span class="line">(<span class="number">5</span>,<span class="number">30010</span>,<span class="number">99990</span>);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-
-          
+          <p><strong>表素材</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/27/表素材/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -796,199 +798,14 @@
 
       
         
-          
-            <ol>
-<li><p>分类</p>
-<ul>
-<li><p>内连接</p>
-</li>
-<li><p>外连接</p>
-<blockquote>
-<p>左外连接<br>右外连接<br>全外连接(msyql不支持)</p>
-</blockquote>
-</li>
-<li><p>自然连接(属于一种简化方式)</p>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="2">
-<li><p>内连接</p>
-<ul>
-<li><p>方言: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span>,表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">WHERE</span> 别名<span class="number">1.</span>xx=别名<span class="number">2.</span>xx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>标准: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">INNER</span> <span class="keyword">JOIN</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">ON</span> 别名<span class="number">1.</span>xx=别名<span class="number">2.</span>xx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>自然: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> 表<span class="number">2</span> 别名<span class="number">2</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>内连接查询出的所有记录都满足条件</p>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="3">
-<li><p>外连接</p>
-<ul>
-<li><p>左外: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">ON</span> 别名<span class="number">1.</span>xx=别名<span class="number">2.</span>xx</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>左表记录无论是否满足条件都会查询出来, 而右表只有满足条件才能出来。左表中不满足条件的记录, 右表部分都为NULL</p>
-</blockquote>
-</li>
-<li><p>左外自然: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">NATURAL</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">ON</span> 别名<span class="number">1.</span>xx=别名<span class="number">2.</span>xx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>右外: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">ON</span> 别名<span class="number">1.</span>xx=别名<span class="number">2.</span>xx</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>右表记录无论是否满足条件都会查询出来, 而左表只有满足条件才能出来。右表不满足条件的记录, 其左表部分都为NULL</p>
-</blockquote>
-</li>
-<li><p>右外自然: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表<span class="number">1</span> 别名<span class="number">1</span> <span class="keyword">NATURAL</span> <span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> 表<span class="number">2</span> 别名<span class="number">2</span> <span class="keyword">ON</span> 别名<span class="number">1.</span>xx=别名<span class="number">2.</span>xx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>全链接: 可以使用 UNION 来完成全链接 </p>
-</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--Demo</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">内连接</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">  <span class="comment">--方言:</span></span><br><span class="line">    <span class="keyword">SELECT</span> e.ename,e.sal,d.dname</span><br><span class="line">    <span class="keyword">FROM</span> emp e,dept d</span><br><span class="line">    <span class="keyword">WHERE</span> e.deptno=d.deptno</span><br><span class="line"></span><br><span class="line">  <span class="comment">--标准:</span></span><br><span class="line">    <span class="keyword">SELECT</span> e.ename,e.sal,d.dname</span><br><span class="line">    <span class="keyword">FROM</span> emp e <span class="keyword">INNER</span> <span class="keyword">JOIN</span> dept d</span><br><span class="line">    <span class="keyword">ON</span> e.deptno=d.deptno</span><br><span class="line"></span><br><span class="line">  <span class="comment">--自然:</span></span><br><span class="line">    <span class="keyword">SELECT</span> e.ename,e.sal,d.dname </span><br><span class="line">    <span class="keyword">FROM</span> emp e <span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> dept d</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">外连接</span></span><br><span class="line"><span class="comment">外连接有主次，左外即左表为主！</span></span><br><span class="line"><span class="comment">即emp为主，那么主表中所有的记录无论满不满足条件，都打印出来。</span></span><br><span class="line"><span class="comment">当不满足条件时，右表部门使用null来</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.ename,e.sal,d.dname</span><br><span class="line"><span class="keyword">FROM</span> emp e <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> dept d</span><br><span class="line"><span class="keyword">ON</span> e.deptno=d.deptno</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> e.ename,e.sal,d.dname</span><br><span class="line"><span class="keyword">FROM</span> emp e <span class="keyword">RIGHT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> dept d</span><br><span class="line"><span class="keyword">ON</span> e.deptno=d.deptno</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/27/列运算/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="蔡伟峰">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="蔡伟峰">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/27/列运算/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-27T22:09:35+08:00">
-                2020-10-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="列运算"><a href="#列运算" class="headerlink" title="列运算"></a><strong>列运算</strong></h1><h2 id="数量类型的列可以做加减乘除运算"><a href="#数量类型的列可以做加减乘除运算" class="headerlink" title="数量类型的列可以做加减乘除运算"></a>数量类型的列可以做加减乘除运算</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> sal*<span class="number">1.5</span> <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> sal+comm <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串类型可以做连续运算"><a href="#字符串类型可以做连续运算" class="headerlink" title="字符串类型可以做连续运算"></a>字符串类型可以做连续运算</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(<span class="string">'$'</span>,sal) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
-
-<h2 id="转换null值"><a href="#转换null值" class="headerlink" title="转换null值"></a>转换null值</h2><p>有时需要把null转换成其他值，例如com+1000时，如果com列存在NULL值，那么NULL+1000还是NULL，而我们这时希望把NULL当成0来运算</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">ifnull</span>(comm,<span class="number">0</span>)+<span class="number">1000</span> <span class="keyword">from</span> emp; <span class="comment">--如果comm列的值为NULL，则转成0</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="列的别名"><a href="#列的别名" class="headerlink" title="列的别名"></a>列的别名</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">ifnull</span>(comm,<span class="number">0</span>)+<span class="number">1000</span> <span class="keyword">as</span> bonus <span class="keyword">from</span> emp;  </span><br><span class="line"><span class="comment">-- as 可省略</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">ifnull</span>(comm,<span class="number">0</span>)+<span class="number">1000</span> bonus <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
-
-
-          
+          <p>连接查询</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/27/连接查询/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

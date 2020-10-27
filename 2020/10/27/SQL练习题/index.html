@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="查出至少有一个员工的部门。显示部门编号、部门名称、部门位置、部门人数。 123456789/*列：d.deptno,d.dname,d.loc,部门人数表：dept d , emp e条件：e.deptno=d.deptno*/SELECT d.*,z1.cntFROM dept d,  (SELECT deptno,COUNT(*) cnt FROM emp GROUP BY deptno)">
+<meta name="description" content="SQL练习题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL练习题">
 <meta property="og:url" content="http://yoursite.com/2020/10/27/SQL练习题/index.html">
 <meta property="og:site_name" content="蔡伟峰">
-<meta property="og:description" content="查出至少有一个员工的部门。显示部门编号、部门名称、部门位置、部门人数。 123456789/*列：d.deptno,d.dname,d.loc,部门人数表：dept d , emp e条件：e.deptno=d.deptno*/SELECT d.*,z1.cntFROM dept d,  (SELECT deptno,COUNT(*) cnt FROM emp GROUP BY deptno)">
+<meta property="og:description" content="SQL练习题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-27T13:53:10.155Z">
+<meta property="og:updated_time" content="2020-10-27T14:14:22.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL练习题">
-<meta name="twitter:description" content="查出至少有一个员工的部门。显示部门编号、部门名称、部门位置、部门人数。 123456789/*列：d.deptno,d.dname,d.loc,部门人数表：dept d , emp e条件：e.deptno=d.deptno*/SELECT d.*,z1.cntFROM dept d,  (SELECT deptno,COUNT(*) cnt FROM emp GROUP BY deptno)">
+<meta name="twitter:description" content="SQL练习题">
 
 
 
@@ -299,7 +299,10 @@
       
 
       
-        <ol>
+        <p><strong>SQL练习题</strong></p>
+<a id="more"></a> 
+
+<ol>
 <li><p>查出至少有一个员工的部门。显示部门编号、部门名称、部门位置、部门人数。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：d.deptno,d.dname,d.loc,部门人数</span></span><br><span class="line"><span class="comment">表：dept d , emp e</span></span><br><span class="line"><span class="comment">条件：e.deptno=d.deptno</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> d.*,z1.cnt</span><br><span class="line"><span class="keyword">FROM</span> dept d,</span><br><span class="line">  (<span class="keyword">SELECT</span> deptno,<span class="keyword">COUNT</span>(*) cnt <span class="keyword">FROM</span> emp <span class="keyword">GROUP</span> <span class="keyword">BY</span> deptno) z1</span><br><span class="line"><span class="keyword">WHERE</span> d.deptno=z1.deptno</span><br></pre></td></tr></table></figure>
 
@@ -357,13 +360,10 @@
 </ol>
 <ol start="8">
 <li><p>列出与庞统从事相同工作的所有员工及部门名称。</p>
-<ol>
-<li><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：e.* , d.dname</span></span><br><span class="line"><span class="comment">表：emp e , dept d</span></span><br><span class="line"><span class="comment">条件：job = (庞统的工作)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.* , d.dname</span><br><span class="line"><span class="keyword">FROM</span> emp e , dept d</span><br><span class="line"><span class="keyword">WHERE</span> e.deptno=d.deptno <span class="keyword">AND</span> job = (<span class="keyword">SELECT</span> job <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename=<span class="string">'庞统'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">列：e.* , d.dname</span></span><br><span class="line"><span class="comment">表：emp e , dept d</span></span><br><span class="line"><span class="comment">条件：job = (庞统的工作)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> e.* , d.dname</span><br><span class="line"><span class="keyword">FROM</span> emp e , dept d</span><br><span class="line"><span class="keyword">WHERE</span> e.deptno=d.deptno <span class="keyword">AND</span> job = (<span class="keyword">SELECT</span> job <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename=<span class="string">'庞统'</span>)</span><br></pre></td></tr></table></figure>
 
 
 
-</li>
-</ol>
 </li>
 </ol>
 <ol start="9">
@@ -406,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/10/27/子查询/" rel="next" title="子查询">
-                <i class="fa fa-chevron-left"></i> 子查询
+              <a href="/2020/10/27/列运算/" rel="next" title="列运算">
+                <i class="fa fa-chevron-left"></i> 列运算
               </a>
             
           </div>
@@ -415,10 +415,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/10/27/列运算/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
